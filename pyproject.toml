@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fraud-drift-monitoring"
+version = "0.1.0"
+description = "PSI and PR-AUC drift monitoring with a retraining trigger for a card fraud model (FD06)"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas==3.1.1",
+    "numpy==2.5.4",
+    "scikit-learn==1.9.1",
+    "xgboost==3.4.1",
+    "lightgbm==4.7.0",
+    "scipy==1.18.1",
+    "matplotlib==3.11.2",
+    "seaborn==0.13.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.2.0",
+    "jupytext==1.19.6",
+    "nbconvert==7.17.2",
+    "ipykernel==7.4.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
