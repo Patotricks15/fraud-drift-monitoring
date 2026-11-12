@@ -32,19 +32,24 @@ Retraining is triggered if either rule fires. "Consecutive" means adjacent 6-hou
 
 ## Results
 
-Not yet produced. The notebook needs the Kaggle dataset, which is not downloaded to this workstation. After running the notebook on Kaggle, fill in the tables below from the generated files.
+Real data. Only 2 monitored 6-hour windows exist (the validation window and the test window), so the trigger rule has very little evidence.
 
 | Item | Value |
 |---|---|
-| Reference PR-AUC (validation) | pending Kaggle run |
-| Monitored windows | pending Kaggle run |
-| First window with a PSI alert on score | pending Kaggle run |
-| First window with PR-AUC drop > 30% | pending Kaggle run |
-| Retraining trigger fired | pending Kaggle run |
+| Reference PR-AUC (validation, measured on the same window) | 0.819 |
+| Monitored windows | 2 (start 36 h and 42 h) |
+| Window 36 h: PR-AUC / relative drop | 0.819 / -0.00% |
+| Window 42 h (test): PR-AUC / relative drop | 0.690 / 15.7% |
+| PSI status counts (all features and score, both windows) | stable 32, warning 19, alert 9 |
+| Score PSI at 42 h | 0.077 (stable) |
+| Worst feature PSI at 42 h | V1 = 1.01 (alert), V3 = 0.75 (alert) |
+| First window with a PSI alert on score | none |
+| First window with PR-AUC drop > 30% | none (drop is 15.7%) |
+| Retraining trigger fired | no |
 
 ## Decision
 
-Pending the Kaggle run. The decision is whether the retraining trigger fires, and in which 6-hour window, on the real validation and test windows.
+The retraining trigger did not fire. Feature distributions moved in the test window (V1, V3, V28 alert), but the score PSI stayed stable and the PR-AUC drop stayed below 30%. Because only one window moved, the two-consecutive-window rule cannot be tested on this dataset. A longer monitoring horizon is needed to test the rule properly.
 
 ## Limitation
 
